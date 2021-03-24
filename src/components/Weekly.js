@@ -40,13 +40,28 @@ const marketSchedule = [
   }
 ];
 
-function Weekly()
+class Weekly extends React.Component
 {
-  return(
-    <div>
-      {marketSchedule.map(x => <Location day={x.booth} location={x.location} hours={x.hours} booth={x.booth}/>)}
-    </div>
-  )
+  constructor(){
+    super();
+    this.state = {
+      choice: "Sunday"
+    }
+  }
+
+  chooseDay = (choice) => {
+    this.setState({choice:choice})
+  }
+
+  render()
+  {
+    return (
+      <div>
+        {marketSchedule.map(x => <Location choice={this.state.choice} click={this.chooseDay.bind(this,x.day)} day={x.day} location={x.location} hours={x.hours} booth={x.booth} />)}
+      </div>
+    )
+  }
+ 
 }
 
 export default Weekly;
