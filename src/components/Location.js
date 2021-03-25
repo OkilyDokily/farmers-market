@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 function details(isTrue,prop)
 {
@@ -7,6 +7,7 @@ function details(isTrue,prop)
   const indentedStyle = {
     paddingLeft:"20px"
   }
+
 
   if(isTrue){
   return(
@@ -24,12 +25,26 @@ function details(isTrue,prop)
 
 function Location(prop)
 {
+
+  const dayStyle = {
+    border: "1px solid green"
+  }
+
   return(
     <div>
-      <p onClick={prop.click}>{prop.day}</p>
+      <p style={dayStyle} onClick={prop.click}>{prop.day}</p>
       {details((prop.day === prop.choice),{...prop})}
     </div> 
   )
 }
 
 export default Location;
+
+Location.propTypes = {
+  click: PropTypes.func,
+  day:PropTypes.string,
+  choice:PropTypes.string,
+  location:PropTypes.string,
+  booth:PropTypes.string,
+  hours:PropTypes.string
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import reportWebVitals from "../reportWebVitals";
 import Month from "./Month";
 import Selection from "./Selection"
 
@@ -271,42 +272,59 @@ const availableProduce = [
   }
 ];
 
+const grid = {
+  display:"grid",
+  gridTemplateColumns: "90px 90px 90px",
+  gridAutoRows: "min-content",
+  gridColumnGap: "2px",
+  gridRowGap: "2px"
+}
+
+const monthlyStyle = {
+  display:"flex",
+  justifyContent:"space-around",
+  width: "700px"
+}
+
+const isMarked = {
+  backgroundColor:"red",
+  color:"white"
+}
+
 
 class Monthly extends React.Component {
 
   constructor(){
     super()
     this.state = {
-      select : "January"
+      index : 0
     }
   }
   
-  returnSelectOrNull = (select,selection) => {
-    if(select === this.state.select)
-    {
-      return <Selection selection={selection}/>
-    }
-    else{
-      return null;
-    }
+  returnSelect = () => {
+    const selection = availableProduce[this.state.index].selection;
+    
+    return (<Selection selection={selection}/>);
+  
   }
 
-  changeMonth = (select) => {
-    this.setState({select: select})
+  changeMonth = (index) => {
+    this.setState({index: index})
   }
 
 
   render() {
     return (
-      <div>
-        {availableProduce.map(x =>
+      <div style={monthlyStyle}>
+        {this.returnSelect()}
+        <div style={grid}>
+          
+        {availableProduce.map((x,index) =>
         (
-          <div>
-            <Month month={x.month} click={this.changeMonth.bind(this,x.month)} />
-            {this.returnSelectOrNull(x.month,x.selection)}
-          </div>
+            <Month style={(index === this.state.index) ? isMarked : {}} month={x.month} key={index} click={this.changeMonth.bind(this,index)} />   
         )
         )}
+        </div>
       </div>
     )
   }

@@ -1,8 +1,9 @@
 import React from 'react'
 import Weekly from './components/Weekly'
 import Monthly from './components/Monthly'
+import Header from "./components/Header"
 
-const appStyle = {
+const innerDivStyle = {
   display:"flex",
   justifyContent:"space-around",
   margin: "auto"
@@ -10,9 +11,12 @@ const appStyle = {
 
 function App() {
   return (
-    <div style={appStyle} className="App">
-      <Weekly/>
-      <Monthly/>
+    <div  className="App">
+      <Header/>
+      <div style={innerDivStyle}>
+        <Weekly />
+        <Monthly />
+      </div>
     </div>
   );
 }

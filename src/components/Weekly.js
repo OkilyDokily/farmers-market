@@ -57,7 +57,7 @@ class Weekly extends React.Component
   {
     return (
       <div>
-        {marketSchedule.map(x => <Location choice={this.state.choice} click={this.chooseDay.bind(this,x.day)} day={x.day} location={x.location} hours={x.hours} booth={x.booth} />)}
+        {marketSchedule.map((x,i) => <Location choice={this.state.choice} click={this.chooseDay.bind(this,x.day)} day={x.day} location={x.location} hours={x.hours} booth={x.booth} key={i} />)}
       </div>
     )
   }
